@@ -1,0 +1,29 @@
+.header{
+    background-color: black;
+    color: yellow;
+    font-style: normal;
+    font-family:sans-serif;
+    font-weight:600px;
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+}
+
+#app-name-first-span{
+    color:white;
+}
+
+#app-name-second-span{
+    color:yellow;
+}
+
+.nav-links a{
+    padding:10px;
+    color:yellow;
+    text-decoration: none;
+}
+
+.nav-links a:hover,.nav-links a:focus{
+    color:white;
+}
+

@@ -1,0 +1,19 @@
+.home{
+    margin-top:2px;
+}
+
+.home img{
+    image-resolution:inherit;
+}
+
+.buttons{
+    align-items: center;
+    margin-top:20px;
+}
+
+.btn{
+    
+    color:black;
+    font-weight: bold;
+    
+}
