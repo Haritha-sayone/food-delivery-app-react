@@ -3,10 +3,10 @@ import './About.css';
 
 function About() {
     return (
-        <div className={"container"}>
+        <div className="container">
             <h4 style={{ textAlign: 'center', fontStyle: 'italic' }}>About Us.......</h4>
-            <div className="row">
-                <div className={"col-lg-6 col-sm-12"}>
+            <div className="row" id="about-row">
+                <div className="col-lg-6 col-sm-12">
                     <h5>Welcome to FoodPrism Restaurant</h5>
                     <p>
                         Our new menus, conceived by Chef David Hawksworth and his culinary team, showcase ingredient led, contemporary cuisine that is firmly rooted in the classics; bold, bright flavours are presented in skillfully executed dishes that echo nostalgia with a modern and local twist.
