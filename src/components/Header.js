@@ -26,10 +26,10 @@ function Header() {
                 <div className="nav-links">
                     {/* if logged in use is admin */}
                     <Link to="/">Home</Link>
-                    <Link to="menu">Menu</Link>
+                    <Link to="/menu">Menu</Link>
                     {/* <Link to="about">About Us</Link> */}
-                    <Link to="signup">SignUp</Link>
-                    <Link to="signin">SignIn</Link>
+                    <Link to="/signup">SignUp</Link>
+                    <Link to="/signin">SignIn</Link>
                     {/* <Link to="admin">Admin</Link> */}
                 </div>
 

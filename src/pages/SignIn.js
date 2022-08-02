@@ -1,67 +1,64 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
-import SignUp from "./SignUp";
+import { Link, useNavigate } from 'react-router-dom';
 
-// import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-
+import app from "../firebase/config";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 
 function SignIn() {
 
-    const [loginEmail, setLoginEmail] = useState("");
-    const [loginPassword, setLoginPassword] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const auth = getAuth(app);
+    const navigate = useNavigate();
 
-    // const formSubmitHandler = () => {
-    //     // if user authentication fails, redirect user to signup page,
-    //     // else, check if the user's role s admin => AdminHome,
-    //     // else, redirect to Menu.js
-    //     const auth = getAuth(app);
-    //     signInWithEmailAndPassword(auth, email, password)
-    //         .then((userCredential) => {
-    //             // Signed in 
-    //             const user = userCredential.user;
-    //             // ...
-    //         })
-    //         .catch((error) => {
-    //             const errorCode = error.code;
-    //             const errorMessage = error.message;
-    //         });
-    // }
+    const login = async (event) => {
+        event.preventDefault();
+        try {
+            const response = await signInWithEmailAndPassword(auth, email, password)
+            alert("login successful")
+            navigate("/")
+            console.log(response);
+        }
+        catch (error) {
+            alert(error.code,error.message)
+        }
+
+        //     .then(response => {
+        //         console.log(response);
+        //         alert("login successful")
+        //         navigate("/")
+        //     }
+        //     ).catch(error => alert(error.message));
+        // return response;
+    }
 
     return (
-        <div className="mt-5 mx-5 px-5">
-            <form>
-
-                <div className="mb-3 col-6">
-                    {/* <label htmlFor="exampleInputEmail1" className="form-label">Email address</label> */}
+        <div className="mx-5 my-5">
+            <form onSubmit={login}>
+                <div className="mb-3">
+                    <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
                     <input
                         type="email"
                         className="form-control"
                         id="exampleInputEmail1"
                         aria-describedby="emailHelp"
-                        placeholder="Email"
-                        onChange={event => setLoginEmail(event.target.value)}
+                        onChange={event => setEmail(event.target.value)}
                     />
-                    <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
                 </div>
-
-                <div className="mb-3 col-6">
-                    {/* <label htmlFor="exampleInputPassword1" className="form-label">Password</label> */}
+                <div className="mb-3">
+                    <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
                     <input
                         type="password"
                         className="form-control"
                         id="exampleInputPassword1"
-                        onChange={event => setLoginPassword(event.target.value)}
-                        placeholder="Password"
+                        onChange={event => setPassword(event.target.value)}
                     />
                 </div>
-
-                <div className="mb-3 form-check col-6">
-                    <label className="form-check-label" htmlFor="exampleCheck1">New User? <Link to="signup" element={<SignUp />} >Register Now</Link></label>
+                <button type="submit" className="btn btn-primary">Sign In</button>
+                <div className="mt-3">
+                    New response? <Link to="/signup">Create Account</Link>
                 </div>
-
-                <button type="submit" className="btn btn-primary">Login</button>
-
             </form>
         </div>
     )

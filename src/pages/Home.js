@@ -10,12 +10,12 @@ function Home() {
         <div className="home">
             <img src={Image} width={"1279px"} height={"510px"} alt="pic of parcel" />
             <About />
-            <div class="d-grid gap-3 col-6 mx-auto" style={{ marginBottom: "60px" }}>
-                <button class="btn btn-warning" type="button" onClick={() => {
+            <div className="d-grid gap-3 col-6 mx-auto" style={{ marginBottom: "60px" }}>
+                <button className="btn btn-warning" type="button" onClick={() => {
                     navigate("./signup")
                 }}>SignUp</button>
 
-                <button class="btn btn-warning" type="button" onClick={() => {
+                <button className="btn btn-warning" type="button" onClick={() => {
                     navigate("./signin")
                 }}>SignIn</button>
             </div>
