@@ -1,25 +1,30 @@
 import React, { useState } from "react";
-import app from "../firebase/config";
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from "../firebase/config";
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from "react-router-dom";
+import { useUserAuth } from "../context/UserAuthContext";
 
 function SignUp() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [userRole, setUserRole] = useState("");
-    const auth = getAuth(app);
+    const [role, setRole] = useState("");
     const navigate = useNavigate();
+    const { signUp,user } = useUserAuth();
+    const [error, setError] = useState("");
 
     const registerUser = async (event) => {
         event.preventDefault();
         try {
-            const response = await createUserWithEmailAndPassword(auth, email, password, userRole)
-            alert("User created successfully")
+            await signUp(email, password, role);
+            console.log(user.email,user.password,user.role);
+            // const response = await createUserWithEmailAndPassword(auth, email, password, userRole)
+            // alert("User created successfully")
             navigate("/signin")
-            return response;
+            // return response;
         }
-        catch (error) {
-            alert(error.message)
+        catch (err) {
+            setError(err.message)
+            // alert(error.message)
         }
         // .then(response => {
         //     console.log(response)
@@ -31,6 +36,11 @@ function SignUp() {
 
     return (
         <div className="mx-5 my-5">
+            {error && (
+                <div className="alert alert-danger" role="alert">
+                    {error}
+                </div>
+            )}
             <form onSubmit={registerUser}>
                 <div className="mb-3">
                     <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
@@ -57,7 +67,7 @@ function SignUp() {
                         type="input"
                         className="form-control"
                         id="exampleRole1"
-                        onChange={(event) => setUserRole(event.target.value)}
+                        onChange={(event) => setRole(event.target.value)}
                     />
                 </div>
                 <button type="submit" className="btn btn-primary">Sign Up</button>

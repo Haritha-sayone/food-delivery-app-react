@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import Logo from "../images/logo.png";
 import Avatar from '../images/avatar.png';
@@ -10,8 +10,9 @@ import "./Header.css";
 
 
 function Header() {
+    const navigate=useNavigate()
     const userLogin = () => {
-
+        navigate("/signin")
     }
 
     return (
@@ -34,7 +35,7 @@ function Header() {
                 </div>
 
                 <div className="profile">
-                    <img src={Avatar} width={"50px"} alt="Profile picture of user" id="avatar" onClick={() => userLogin} />
+                    <img src={Avatar} width={"50px"} alt="user profile" id="avatar" onClick={userLogin} />
                 </div>
 
             </header>

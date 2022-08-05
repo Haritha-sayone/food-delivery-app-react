@@ -3,20 +3,22 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { StateProvider } from "./context/StateProvider";
-import {initialState} from "./context/initialState";
+import { initialState } from "./context/initialState";
 import reducer from './context/reducer';
+//userAuthContextProider context
+import { UserAuthContextProvider } from './context/UserAuthContext';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <StateProvider initialState={initialState} reducer={reducer}>
+    <Router>
+      <UserAuthContextProvider>
         <App />
-      </StateProvider>
-    </BrowserRouter>
+      </UserAuthContextProvider>
+    </Router>
   </React.StrictMode>
 );
 
