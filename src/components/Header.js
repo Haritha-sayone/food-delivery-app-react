@@ -11,7 +11,7 @@ import "./Header.css";
 
 function Header() {
     const navigate=useNavigate()
-    const userLogin = () => {
+    const popupDropdown = () => {
         navigate("/signin")
     }
 
@@ -29,13 +29,13 @@ function Header() {
                     <Link to="/">Home</Link>
                     <Link to="/menu">Menu</Link>
                     {/* <Link to="about">About Us</Link> */}
-                    <Link to="/signup">SignUp</Link>
-                    <Link to="/signin">SignIn</Link>
+                    {/* <Link to="/signup">SignUp</Link> */}
+                    <Link to="/signin">SignIn/SignUp</Link>
                     {/* <Link to="admin">Admin</Link> */}
                 </div>
 
                 <div className="profile">
-                    <img src={Avatar} width={"50px"} alt="user profile" id="avatar" onClick={userLogin} />
+                    <img src={Avatar} width={"50px"} alt="user profile" id="avatar" onClick={popupDropdown} />
                 </div>
 
             </header>

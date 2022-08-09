@@ -3,35 +3,32 @@ import { auth } from "../firebase/config";
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from "react-router-dom";
 import { useUserAuth } from "../context/UserAuthContext";
+import { db } from "../firebase/config";
+import { collection, addDoc } from "firebase/firestore";
 
 function SignUp() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [role, setRole] = useState("");
     const navigate = useNavigate();
-    const { signUp,user } = useUserAuth();
+    const { signUp, user } = useUserAuth();
     const [error, setError] = useState("");
 
-    const registerUser = async (event) => {
+    const registerUser = (event) => {
         event.preventDefault();
-        try {
-            await signUp(email, password, role);
-            console.log(user.email,user.password,user.role);
-            // const response = await createUserWithEmailAndPassword(auth, email, password, userRole)
-            // alert("User created successfully")
+        signUp(email, password).then(cred => {
+            console.log("user created : ", cred);
+            addDoc(collection(db, "users"), {
+                email: email,
+                password: password,
+                id: cred.user.uid,
+                role: role
+            });
+        }).then(() => {
             navigate("/signin")
-            // return response;
-        }
-        catch (err) {
+        }).catch(err => {
             setError(err.message)
-            // alert(error.message)
-        }
-        // .then(response => {
-        //     console.log(response)
-        //     alert("account created successfully");
-        //     navigate("/signin");
-        // })
-        // .catch(error => console.log(error))
+        })
     }
 
     return (
@@ -41,7 +38,7 @@ function SignUp() {
                     {error}
                 </div>
             )}
-            <form onSubmit={registerUser}>
+            <form onSubmit={registerUser} autoComplete="off">
                 <div className="mb-3">
                     <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
                     <input

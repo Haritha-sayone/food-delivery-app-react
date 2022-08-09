@@ -68,7 +68,7 @@ function SignIn() {
                     {error}
                 </div>
             )}
-            <form onSubmit={login}>
+            <form onSubmit={login} autoComplete="off">
                 <div className="mb-3">
                     <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
                     <input
