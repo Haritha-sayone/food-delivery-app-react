@@ -8,57 +8,24 @@ import { useStateValue } from "../context/StateProvider";
 import { actionType } from "../context/reducer";
 import { useUserAuth } from "../context/UserAuthContext";
 
-
 function SignIn() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
-    const { signIn, user } = useUserAuth();
+    const { signIn } = useUserAuth();
     const [error, setError] = useState("");
     // const [{ user }, dispatch] = useStateValue();
 
     const login = async (event) => {
         event.preventDefault();
-        try {
-            await signIn(email, password);
-            console.log(user, user.email, user.role);
-            // const response = await createUserWithEmailAndPassword(auth, email, password, userRole)
-            // alert("User created successfully")
+        signIn(email, password).then((cred) => {
+            // alert("Logged in successfully");
+            // console.log(cred.user);
             navigate("/")
-            // return response;
-        }
-        catch (err) {
-            setError(err.message)
-            // alert(error.message)
-        }
-
-        // const login = async (event) => {
-        //     event.preventDefault();
-        //     try {
-        //         const { user: { refreshToken, providerData } } = await signInWithEmailAndPassword(auth, email, password);
-        //         dispatch({
-        //             type: actionType.SET_USER,
-        //             user: providerData[0],
-        //         })
-        //         console.log(user);
-        //         console.log(user.refreshToken);
-        //         console.log(user.providerData[0]);
-        //         // alert("login successful")
-        //         navigate("/")
-
-        //     }
-        //     catch (error) {
-        //         alert(error.code, error.message)
-        //     }
-
-        //     .then(response => {
-        //         console.log(response);
-        //         alert("login successful")
-        //         navigate("/")
-        //     }
-        //     ).catch(error => alert(error.message));
-        // return response;
+        }).catch(err => {
+            setError(err.code);
+        })
     }
 
     return (
@@ -88,7 +55,7 @@ function SignIn() {
                         onChange={event => setPassword(event.target.value)}
                     />
                 </div>
-                <button type="submit" className="btn btn-primary">Sign In</button>
+                <button type="submit" className="btn btn-primary">LogIn</button>
                 <div className="mt-3">
                     New user? <Link to="/signup">Create Account</Link>
                 </div>

@@ -11,13 +11,12 @@ function SignUp() {
     const [password, setPassword] = useState("");
     const [role, setRole] = useState("");
     const navigate = useNavigate();
-    const { signUp, user } = useUserAuth();
+    const { signUp } = useUserAuth();
     const [error, setError] = useState("");
 
     const registerUser = (event) => {
         event.preventDefault();
         signUp(email, password).then(cred => {
-            console.log("user created : ", cred);
             addDoc(collection(db, "users"), {
                 email: email,
                 password: password,
@@ -27,7 +26,7 @@ function SignUp() {
         }).then(() => {
             navigate("/signin")
         }).catch(err => {
-            setError(err.message)
+            setError(err.code)
         })
     }
 

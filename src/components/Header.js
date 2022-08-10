@@ -1,19 +1,17 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+import { useUserAuth } from "../context/UserAuthContext";
+
 import Logo from "../images/logo.png";
 import Avatar from '../images/avatar.png';
 
 import "./Header.css";
 
 
-
-
 function Header() {
-    const navigate=useNavigate()
-    const popupDropdown = () => {
-        navigate("/signin")
-    }
+    const navigate = useNavigate();
+    const { logout, loggedUser } = useUserAuth();
 
     return (
         <div>
@@ -31,11 +29,17 @@ function Header() {
                     {/* <Link to="about">About Us</Link> */}
                     {/* <Link to="/signup">SignUp</Link> */}
                     <Link to="/signin">SignIn/SignUp</Link>
+                    <a type="button" onClick={() => {
+                        logout().then(() => {
+                            navigate("/signin");
+                        })
+                    }}>Logout</a>
                     {/* <Link to="admin">Admin</Link> */}
                 </div>
 
                 <div className="profile">
-                    <img src={Avatar} width={"50px"} alt="user profile" id="avatar" onClick={popupDropdown} />
+                    <img src={Avatar} width={"50px"} alt="user profile" id="avatar" />
+                    <span>{loggedUser?.email}</span>
                 </div>
 
             </header>
