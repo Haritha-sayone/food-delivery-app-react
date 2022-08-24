@@ -1,7 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import {collection, getFirestore} from "firebase/firestore";
-import {getStorage} from "firebase/storage";
+import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyAZ18O82rw0H97oGGj3JCO99M5nCqfPEbA",
@@ -16,13 +17,32 @@ const firebaseConfig = {
 // init firebase app
 const app = initializeApp(firebaseConfig);
 // init services
-export const auth = getAuth(app);
-export const db = getFirestore(app);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const storage = getStorage(app);
 
-const storage=getStorage(app);
+
+export default app;
+export { auth, db, storage };
+
+
+
+
+
+
+
+
 
 //collection ref
-const userRef=collection(db,'users')
+// export const userRef = collection(db, 'users');
+
+// getDocs(userRef).then(snapshot => {
+//     let users=[]
+//     snapshot.docs.forEach(doc => {
+//         users.push({ ...doc.data(), id:doc.id })
+//     })
+//     console.log(users);
+// })
 
 // export const usersDb = db.collection('users');
 
@@ -31,5 +51,3 @@ const userRef=collection(db,'users')
 // export const createUserDocument = async (user, additionalData) => {
 //     if (!user) return;
 // }
-
-export default app;

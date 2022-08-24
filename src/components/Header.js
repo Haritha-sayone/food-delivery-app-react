@@ -1,17 +1,15 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-
 import { useUserAuth } from "../context/UserAuthContext";
 
 import Logo from "../images/logo.png";
 import Avatar from '../images/avatar.png';
-
 import "./Header.css";
 
 
 function Header() {
+    const { logout, loggedUser, admin, setAdmin } = useUserAuth();
     const navigate = useNavigate();
-    const { logout, loggedUser } = useUserAuth();
 
     return (
         <div>
@@ -23,18 +21,22 @@ function Header() {
                 </div>
 
                 <div className="nav-links">
-                    {/* if logged in use is admin */}
                     <Link to="/">Home</Link>
+                    {
+                        admin && <Link to="/admin">Dashboard</Link>
+                    }
                     <Link to="/menu">Menu</Link>
-                    {/* <Link to="about">About Us</Link> */}
-                    {/* <Link to="/signup">SignUp</Link> */}
                     <Link to="/signin">SignIn/SignUp</Link>
-                    <a type="button" onClick={() => {
-                        logout().then(() => {
-                            navigate("/signin");
-                        })
-                    }}>Logout</a>
-                    {/* <Link to="admin">Admin</Link> */}
+                    {
+                        loggedUser && <a
+                            type="button"
+                            onClick={() => {
+                                logout().then(() => {
+                                    setAdmin(false);
+                                    navigate("/signin");
+                                })
+                            }}>Logout</a>
+                    }
                 </div>
 
                 <div className="profile">

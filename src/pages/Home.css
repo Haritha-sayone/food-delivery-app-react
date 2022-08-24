@@ -1,5 +1,5 @@
 .home{
-    margin-top:2px;
+    width:100vw;
 }
 
 .home img{
@@ -11,7 +11,7 @@
     margin-top:20px;
 }
 
-.btn{
+.home .btn{
     
     color:black;
     font-weight: bold;

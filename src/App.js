@@ -6,7 +6,10 @@ import Home from './pages/Home';
 import Menu from './pages/Menu';
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
+
 import AdminHome from './components/Admin/AdminHome';
+import AddItems from './components/Admin/AddItems';
+import Items from './pages/Items';
 
 import { Routes, Route } from 'react-router-dom';
 
@@ -15,7 +18,7 @@ import { Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App" style={{ width: "1279px" }}>
+    <div className="App" style={{ width: "100vw" }}>
       <Header />
 
       <Routes>
@@ -29,7 +32,8 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/admin" element={<AdminHome />} />
-
+        <Route path="/items/add" element={<AddItems />} />
+        <Route path="/items" element={<Items />} />
       </Routes>
 
       <Footer />
