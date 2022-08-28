@@ -35,6 +35,8 @@ const AddItems = () => {
         }).then(() => {
             alert("item added successfully");
             navigate("/items");
+        }).catch(err => {
+            setError(err.code)
         })
 
     };

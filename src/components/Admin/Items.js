@@ -26,7 +26,7 @@ const Items = () => {
     }
 
     const handleDelete = (id) => {
-        deleteObject(ref(storage, "Images/${img}"));
+        // deleteObject(ref(storage, `Images/${img}`));
         deleteDoc(doc(db, "items", id));
         console.log("deleted", id);
     }
