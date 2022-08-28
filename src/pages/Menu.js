@@ -24,8 +24,8 @@ function Menu() {
             {
                 items.map(item => {
                     return (
-                        <div className="col-4">
-                            <div className="card" style={{ margin: "20px" }} key={item.id}>
+                        <div className="col-4" key={item.id}>
+                            <div className="card" style={{ margin: "20px" }}>
                                 <img src={item.img} className="card-img-top" alt="food" width={"10px"} height={"200px"} />
                                 <div className="card-body">
                                     <h5 className="card-title">{item.itemName}</h5>
