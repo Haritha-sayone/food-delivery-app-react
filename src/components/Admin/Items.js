@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { db } from '../firebase/config';
-import { collection, getDocs } from 'firebase/firestore';
+import { db, storage } from '../../firebase/config';
+import { collection, deleteDoc, getDocs, doc } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
+import { deleteObject, ref } from 'firebase/storage';
 
 
 const Items = () => {
     const [items, setItems] = useState([]);
+    const navigate = useNavigate();
+
     useEffect(() => {
         getDocs(collection(db, "items")).then(snapshot => {
             const allItems = snapshot.docs.map(doc => (
@@ -14,9 +18,18 @@ const Items = () => {
                 }
             ));
             setItems(allItems)
-            // console.log(doc.id, " => ", doc.data());
         }).catch(err => console.log(err))
-    }, []);
+    }, [items]);
+
+    const handleEdit = (id) => {
+        navigate(`/items/edit/${id}`)
+    }
+
+    const handleDelete = (id) => {
+        deleteObject(ref(storage, "Images/${img}"));
+        deleteDoc(doc(db, "items", id));
+        console.log("deleted", id);
+    }
 
     return (
         <div>
@@ -30,7 +43,7 @@ const Items = () => {
                         <th scope="col">Item Name</th>
                         <th scope="col">Price</th>
                         <th scope="col">Category</th>
-                        <th scope="col-6">Action</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
 
@@ -39,16 +52,16 @@ const Items = () => {
                         items.map(item => {
                             return (
                                 <tr key={item.id}>
-                                    <td scope='row'>{item.id}</td>
+                                    <td>{item.id}</td>
                                     <td>
                                         <img src={item.img} width={"100px"} height={"100px"} alt='food' />
                                     </td>
                                     <td>{item.itemName}</td>
-                                    <td>{item.price}</td>
+                                    <td>{item.price}₹</td>
                                     <td>{item.category}</td>
                                     <td>
-                                        <button className='btn btn-warning' style={{ marginRight: "5px" }}>Edit</button>
-                                        <button className='btn btn-success'>Delete</button>
+                                        <button className='btn btn-success' style={{ marginRight: "5px" }} onClick={() => handleEdit(item.id)}>Edit</button>
+                                        <button className='btn btn-danger' onClick={() => handleDelete(item.id)}>Delete</button>
                                     </td>
                                 </tr>
                             )

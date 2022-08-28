@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 
-const AdminHome = () => {
+const Dashboard = () => {
     return (
         <div className='container'>
             <div className='row m-5'>
@@ -25,4 +25,4 @@ const AdminHome = () => {
     )
 }
 
-export default AdminHome;
+export default Dashboard;

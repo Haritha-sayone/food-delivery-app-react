@@ -7,9 +7,10 @@ import Menu from './pages/Menu';
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
 
-import AdminHome from './components/Admin/AdminHome';
+import Dashboard from './components/Admin/Dashboard';
 import AddItems from './components/Admin/AddItems';
-import Items from './pages/Items';
+import Items from './components/Admin/Items';
+import EditItems from './components/Admin/EditItems';
 
 import { Routes, Route } from 'react-router-dom';
 
@@ -31,9 +32,10 @@ function App() {
         <Route path="/menu" element={<Menu />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
-        <Route path="/admin" element={<AdminHome />} />
+        <Route path="/admin" element={<Dashboard />} />
         <Route path="/items/add" element={<AddItems />} />
         <Route path="/items" element={<Items />} />
+        <Route path="/items/edit/:id" element={<EditItems />} />
       </Routes>
 
       <Footer />
