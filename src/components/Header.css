@@ -30,9 +30,13 @@
 
 .profile{
     margin-right: 10px;
+    
+}
+
+.profile span{
+    padding:10px;
 }
 
 #avatar{
-    margin-right:10px;
     cursor:pointer;
 }

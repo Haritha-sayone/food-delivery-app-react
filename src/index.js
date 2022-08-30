@@ -10,6 +10,9 @@ import { initialState } from "./context/initialState";
 import reducer from './context/reducer';
 // userAuthContextProvider context
 import { UserAuthContextProvider } from './context/UserAuthContext';
+//Redux
+import { Provider } from 'react-redux';
+import store from './components/redux/store';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -17,7 +20,9 @@ root.render(
   <React.StrictMode>
     <Router>
       <UserAuthContextProvider>
-        <App />
+        <Provider store={store}>
+          <App />
+        </Provider>
       </UserAuthContextProvider>
     </Router>
   </React.StrictMode>

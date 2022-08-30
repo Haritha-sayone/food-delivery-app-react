@@ -11,6 +11,7 @@ import Dashboard from './components/Admin/Dashboard';
 import AddItems from './components/Admin/AddItems';
 import Items from './components/Admin/Items';
 import EditItems from './components/Admin/EditItems';
+import Cart from './components/Cart/Cart';
 
 import { Routes, Route } from 'react-router-dom';
 
@@ -23,7 +24,7 @@ function App() {
       <Header />
 
       <Routes>
-        
+
         {/* <Route path="/*" exact element={<MainContainer />} />
         <Route path="/createItem" element={<CreateContainer />} /> */}
 
@@ -36,6 +37,7 @@ function App() {
         <Route path="/items/add" element={<AddItems />} />
         <Route path="/items" element={<Items />} />
         <Route path="/items/edit/:id" element={<EditItems />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
 
       <Footer />

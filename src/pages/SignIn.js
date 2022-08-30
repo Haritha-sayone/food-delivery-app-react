@@ -25,7 +25,7 @@ function SignIn() {
         signIn(email, password).then((cred) => {
             const docRef = doc(db, "users", cred.user.uid);
             getDoc(docRef).then((doc) => {
-                doc.data().role === "admin" ? navigate("/admin") : navigate("/");
+                doc.data().role === "admin" ? navigate("/admin") : navigate("/menu");
             }).catch((err) => {
                 console.log("error", err);
             })
