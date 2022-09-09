@@ -1,0 +1,9 @@
+.filter-buttons{
+    margin:20px;
+    width:100%;
+    text-align: center;
+    
+}
+.filter-buttons button{
+    margin:5px;
+}

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import FoodDataService from "../../firebase/firebase.services";
 import { storage } from '../../firebase/config';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, updateDoc, doc } from 'firebase/firestore';
 import { db } from '../../firebase/config';
 import { useUserAuth } from '../../context/UserAuthContext';
 
@@ -30,7 +30,12 @@ const AddItems = () => {
                     price,
                     category,
                     img: url
-                });
+                }).then(docRef => {
+                    console.log(docRef);
+                    updateDoc(doc(db, "items", docRef.id), {
+                        id: docRef.id
+                    });
+                })
             })
         }).then(() => {
             alert("item added successfully");

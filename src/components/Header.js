@@ -12,7 +12,7 @@ function Header() {
     const { logout, loggedUser, admin, setAdmin } = useUserAuth();
     const navigate = useNavigate();
     const cartItemsCount = useSelector((state) => {
-        return state.totalCount;
+        return state.cartCount;
     });
     console.log(cartItemsCount);
 

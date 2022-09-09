@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore,collection } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 
@@ -20,7 +20,10 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 const storage = getStorage(app);
-
+//collection refs
+export const usersColl=collection(db,"users");
+export const itensColl=collection(db,"items");
+export const cartColl=collection(db,"cart");
 
 export default app;
 export { auth, db, storage };

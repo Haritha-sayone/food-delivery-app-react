@@ -2,6 +2,7 @@ import React from "react";
 import "./Home.css";
 import Image from '../images/parcel.jpg';
 import About from "./About";
+import Menu from "./Menu";
 import { useNavigate } from "react-router-dom";
 
 function Home() {
@@ -20,6 +21,7 @@ function Home() {
                     navigate("./signin")
                 }}>SignIn</button>
             </div>
+            <Menu />
         </div>
     )
 }
