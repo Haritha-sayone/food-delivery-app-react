@@ -4,13 +4,19 @@ import emptyCart from "../images/emptyCart.svg";
 
 
 const EmptyCart = () => {
-    const navigate=useNavigate();
+    const navigate = useNavigate();
 
     return (
-        <div style={{ marginLeft: "40%", marginTop: "5%" }}>
+        <div className='container'>
             <h1>Your Cart is Empty!</h1>
-            <img src={emptyCart} width={"200px"} height={"200px"} alt='Cart is empty!' />
-            <button className="btn btn-primary" onClick={() => navigate("/menu")}>Go to Menu --&gt;</button>
+            <div className='row'>
+                <div className='col-4'></div>
+                <div className='col-4'>
+                    <img src={emptyCart} width={"200px"} height={"200px"} alt='Cart is empty!' />
+                    <button className="btn btn-primary" onClick={() => navigate("/menu")}>Go to Menu --&gt;</button>
+                </div>
+                <div className='col-4'></div>
+            </div>
         </div>
     )
 }

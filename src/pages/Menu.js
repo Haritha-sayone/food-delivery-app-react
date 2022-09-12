@@ -61,6 +61,11 @@ function Menu() {
         setItems(chickenItems)
     }
 
+    const filterFish=()=>{
+        const fishItems=items.filter(item=>item.category==="Fish");
+        setItems(fishItems)
+    }
+
     // const addToCart = (itemID, item) => {
     //     console.log("clicked",itemID);
 
@@ -93,9 +98,10 @@ function Menu() {
                 <button className="btn btn-outline-success" onClick={filterIcecreams}>Icecreams</button>
                 <button className="btn btn-outline-danger" onClick={filterRice}>Rice</button>
                 <button className="btn btn-outline-warning" onClick={filterChicken}>Chicken</button>
-
+                <button className="btn btn-outline-secondary" onClick={filterFish}>Fish</button>
             </div>
 
+            <div className="row mb-5">
             {
                 items.map(item => {
                     return (
@@ -129,6 +135,7 @@ function Menu() {
                     )
                 })
             }
+            </div>
         </div>
 
     )

@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useUserAuth } from "../context/UserAuthContext";
 
-import { getDoc, doc, addDoc, collection } from "firebase/firestore";
+import { getDoc, doc, addDoc, collection, updateDoc } from "firebase/firestore";
 import { db } from "../firebase/config";
 
 
@@ -15,6 +15,12 @@ function FoodDetails() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     
+    useEffect(() => {
+        getDoc(doc(db, "items", id)).then(doc => {
+            setItem(doc.data());
+        })
+    }, [id])
+
     const addToCart = (itemID, item) => {
         console.log(itemID, item);
         if (loggedUser === null || loggedUser === undefined) {
@@ -26,21 +32,26 @@ function FoodDetails() {
                 dispatch({
                     type: 'addToCart',
                     payload: {
-                        id: itemID,
-                        product: item,
+                        itemId: itemID,
+                        product: { ...item, qty: qty },
                         qty: qty,
                         total: qty * item.price
                     }
                 });
                 addDoc(collection(db, "cart"), {
-                    itemID,
-                    name: item.itemName,
-                    itemPrice: item.price,
-                    qty: qty,
+                    // itemID,
+                    // name: item.itemName,
+                    // itemPrice: item.price,
+                    // qty: qty,
                     cart: item,
-                    Total: qty * item.price,
+                    // Total: qty * item.price,
                     userID: loggedUser.uid,
                     user: loggedUser.email,
+                }).then(docRef=>{
+                    console.log(docRef.id);
+                    updateDoc(doc(db,"cart",docRef.id),{
+                        id:docRef.id
+                    });
                 })
                 alert("item added to cart");
                 navigate("/cart")
@@ -48,17 +59,14 @@ function FoodDetails() {
         }
     }
 
-    useEffect(() => {
-        getDoc(doc(db, "items", id)).then(doc => {
-            setItem(doc.data());
-        })
-    }, [id])
+    
     console.log(item);
     return (
         <div className='container mb-5'>
             <h1>Food Details</h1>
             <div className='card-group row' key={item.id}>
-                <div className='col-12'>
+                <div className="col-3"></div>
+                <div className='col-6'>
                     <div className="card mb-3" style={{ maxWidth: "540px" }}>
                         <div className="row g-0">
 
@@ -116,6 +124,7 @@ function FoodDetails() {
                         </div>
                     </div>
                 </div>
+                <div className="col-3"></div>
             </div>
         </div>
     )

@@ -9,30 +9,26 @@ import { cartColl } from '../../firebase/config';
 const Cart = () => {
     // const [cart, setCart] = useState([]);
     const navigate = useNavigate()
-    const { id } = useParams();
+    // const { id } = useParams();
     const items = useSelector(state => {
         return state.cartItems
     });
     const dispatch = useDispatch();
-    const itemQuantity = useSelector(state => state.itemQty);
+    // const itemQuantity = useSelector(state => state.itemQty);
     const total = useSelector(state => state.totalPrice);
 
     const removeFromCart = (itemID) => {
+        console.log("item id = ", itemID);
+        // console.log("cart id = ",cartID);
+        dispatch({
+            type: 'removeFromCart',
+            payload: {
+                id: itemID
+            }
+        });
         deleteDoc(doc(db, "cart", itemID)).then(() => {
-            dispatch({
-                type: 'removeFromCart',
-                payload: {
-                    id: itemID
-                }
-            })
-            console.log("deleted", itemID);
+            alert("Item deleted");
         })
-        // dispatch({
-        //     type: 'removeFromCart',
-        //     payload: {
-        //         id: itemID
-        //     }
-        // })
         // console.log("deleted", itemID);
     }
 
@@ -52,10 +48,10 @@ const Cart = () => {
         //         // setCart(cartItemsList)
         //     }).catch(err => console.log(err))
         // }
-    }, [items.length, id])
+    }, [items.length])
 
     return (
-        <div className='container mb-5'>
+        <div className='container my-5'>
             <div className='col-6'>
                 <button className="btn btn-primary" onClick={() => navigate("/menu")}>Go to Menu</button>
             </div>
@@ -69,7 +65,8 @@ const Cart = () => {
                     console.log(item.id, item);
                     return (
                         <div className='card-group row' key={item.id}>
-                            <div className='col-12'>
+                            <div className='col-3'></div>
+                            <div className='col-6'>
                                 <div className="card mb-3" style={{ maxWidth: "540px" }}>
                                     <div className="row g-0">
 
@@ -86,12 +83,12 @@ const Cart = () => {
                                                 <h5 className="card-title">{item.itemName}</h5>
                                                 <p className="card-text">Price : {item.price} ₹</p>
                                                 <p className="card-text"><small className="text-muted">
-                                                    Quantity : {itemQuantity} units
+                                                    Quantity : {item.qty} units
                                                 </small>
                                                 </p>
                                                 <p className="card-text">
                                                     <small className="text-muted">
-                                                        Total : {item.price * itemQuantity} ₹
+                                                        Total : {item.price * item.qty} ₹
                                                     </small>
                                                 </p>
                                             </div>
@@ -110,6 +107,7 @@ const Cart = () => {
                                     </div>
                                 </div>
                             </div>
+                            <div className='col-3'></div>
                         </div>
 
                     )
