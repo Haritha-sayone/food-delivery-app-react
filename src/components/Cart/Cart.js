@@ -7,7 +7,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { cartColl } from '../../firebase/config';
 
 const Cart = () => {
-    // const [cart, setCart] = useState([]);
+    const [cart, setCart] = useState([]);
     const navigate = useNavigate()
     // const { id } = useParams();
     const items = useSelector(state => {
@@ -36,18 +36,21 @@ const Cart = () => {
         if (items.length === 0) {
             navigate("/cart/empty")
         }
-        // else {
-        //     getDocs(cartColl).then(snapshot => {
-        //         const cartItemsList = snapshot.docs.map(doc => (
-        //             {
-        //                 ...doc.data(),
-        //                 id: doc.id
-        //             }
-        //         ));
-        //         return cartItemsList;
-        //         // setCart(cartItemsList)
-        //     }).catch(err => console.log(err))
-        // }
+        
+        else {
+            // getDocs(cartColl).then(snapshot => {
+            //     const cartItemsList = snapshot.docs.map(doc => (
+            //         {
+            //             ...doc.data(),
+            //             id: doc.id
+            //         }
+            //     ));
+            //     console.log(cartItemsList);
+            //     // return cartItemsList;
+            //     // setCart(cartItemsList)
+            // }).catch(err => console.log(err))
+            setCart(items)
+        }
     }, [items.length])
 
     return (
@@ -61,7 +64,7 @@ const Cart = () => {
             </div>
 
             {
-                items.map(item => {
+                cart.map(item => {
                     console.log(item.id, item);
                     return (
                         <div className='card-group row' key={item.id}>

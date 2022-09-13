@@ -14,7 +14,7 @@ function FoodDetails() {
     const { loggedUser, admin } = useUserAuth();
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    
+
     useEffect(() => {
         getDoc(doc(db, "items", id)).then(doc => {
             setItem(doc.data());
@@ -38,6 +38,7 @@ function FoodDetails() {
                         total: qty * item.price
                     }
                 });
+
                 addDoc(collection(db, "cart"), {
                     // itemID,
                     // name: item.itemName,
@@ -47,10 +48,10 @@ function FoodDetails() {
                     // Total: qty * item.price,
                     userID: loggedUser.uid,
                     user: loggedUser.email,
-                }).then(docRef=>{
+                }).then(docRef => {
                     console.log(docRef.id);
-                    updateDoc(doc(db,"cart",docRef.id),{
-                        id:docRef.id
+                    updateDoc(doc(db, "cart", docRef.id), {
+                        id: docRef.id
                     });
                 })
                 alert("item added to cart");
@@ -59,7 +60,7 @@ function FoodDetails() {
         }
     }
 
-    
+
     console.log(item);
     return (
         <div className='container mb-5'>
