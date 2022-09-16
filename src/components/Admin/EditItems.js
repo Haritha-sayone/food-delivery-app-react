@@ -8,7 +8,6 @@ const EditItems = () => {
     const [itemName, setItemName] = useState("");
     const [price, setPrice] = useState(0);
     const [category, setCategory] = useState("");
-    // const [img, setImg] = useState(null);
     const [error, setError] = useState("");
     const navigate = useNavigate();
     const { id } = useParams();
@@ -20,7 +19,6 @@ const EditItems = () => {
             setItemName(doc.data().itemName);
             setPrice(doc.data().price);
             setCategory(doc.data().category);
-            // setImg(doc.data().img);
         }).catch(err => {
             setError(err.code)
         })
@@ -86,14 +84,6 @@ const EditItems = () => {
                             onChange={event => setCategory(event.target.value)}
                         />
                     </div>
-                    {/* <div className="mb-3">
-                        <img src={img ? URL.createObjectURL(img) : ""} alt='Foods' width={"200px"} height={"200px"} />
-                        <input
-                            type="file"
-                            className="form-control"
-                            onChange={event => setImg(event.target.files[0])}
-                        />
-                    </div> */}
                     <button type="submit" className="btn btn-success">Update</button>
                 </form>
             </div>

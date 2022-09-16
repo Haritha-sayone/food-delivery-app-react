@@ -1,21 +1,16 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserAuth } from "../context/UserAuthContext";
-
+import { useSelector } from "react-redux";
 import Logo from "../images/logo.png";
 import Avatar from '../images/avatar.png';
 import "./Header.css";
-import { useSelector } from "react-redux";
 
 
 function Header() {
     const { logout, loggedUser, admin, setAdmin } = useUserAuth();
     const navigate = useNavigate();
-    const cartItemsCount = useSelector((state) => {
-        return state.cartCount;
-    });
-    console.log(cartItemsCount);
-
+    const cartItemsCount = useSelector(state => state.cartCount);
     return (
         <div>
             <header className="header">

@@ -1,24 +1,16 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
-
-import { auth } from "../firebase/config";
-import { signInWithEmailAndPassword } from "firebase/auth";
-
-import { useStateValue } from "../context/StateProvider";
-import { actionType } from "../context/reducer";
 import { useUserAuth } from "../context/UserAuthContext";
 import { getDoc, doc } from "firebase/firestore";
 import { db } from "../firebase/config";
 
 
 function SignIn() {
-
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
     const { signIn } = useUserAuth();
-    // const [{ user }, dispatch] = useStateValue();
 
     const login = async (event) => {
         event.preventDefault();

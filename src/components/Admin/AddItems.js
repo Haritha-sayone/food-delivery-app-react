@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import FoodDataService from "../../firebase/firebase.services";
 import { storage } from '../../firebase/config';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { collection, addDoc, updateDoc, doc } from 'firebase/firestore';
@@ -13,7 +12,6 @@ const AddItems = () => {
     const [price, setPrice] = useState(0);
     const [category, setCategory] = useState("");
     const [img, setImg] = useState(null);
-    const [successMsg, setSuccessMsg] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
     const { loggedUser } = useUserAuth();
@@ -42,8 +40,7 @@ const AddItems = () => {
             navigate("/items");
         }).catch(err => {
             setError(err.code)
-        })
-
+        });
     };
 
     return (

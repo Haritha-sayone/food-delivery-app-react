@@ -4,11 +4,10 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 // import { connect } from 'react-redux';
-import { cartColl } from '../../firebase/config';
 
 const Cart = () => {
     const [cart, setCart] = useState([]);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     // const { id } = useParams();
     const items = useSelector(state => {
         return state.cartItems
@@ -17,16 +16,19 @@ const Cart = () => {
     // const itemQuantity = useSelector(state => state.itemQty);
     const total = useSelector(state => state.totalPrice);
 
-    const removeFromCart = (itemID) => {
+    const removeFromCart = (itemID,itm) => {
         console.log("item id = ", itemID);
+        const cartID=itm.cartId
         // console.log("cart id = ",cartID);
+        const itmPrice=itm.qty*itm.price;
         dispatch({
             type: 'removeFromCart',
             payload: {
-                id: itemID
+                id: itemID,
+                netAmount:itmPrice
             }
         });
-        deleteDoc(doc(db, "cart", itemID)).then(() => {
+        deleteDoc(doc(db, "cart", cartID)).then(() => {
             alert("Item deleted");
         })
         // console.log("deleted", itemID);
@@ -38,17 +40,6 @@ const Cart = () => {
         }
         
         else {
-            // getDocs(cartColl).then(snapshot => {
-            //     const cartItemsList = snapshot.docs.map(doc => (
-            //         {
-            //             ...doc.data(),
-            //             id: doc.id
-            //         }
-            //     ));
-            //     console.log(cartItemsList);
-            //     // return cartItemsList;
-            //     // setCart(cartItemsList)
-            // }).catch(err => console.log(err))
             setCart(items)
         }
     }, [items.length])
@@ -101,7 +92,7 @@ const Cart = () => {
                                             <div className="card-body">
                                                 <button
                                                     className="btn btn-danger"
-                                                    onClick={() => removeFromCart(item.id)}>
+                                                    onClick={() => removeFromCart(item.id,item)}>
                                                     Remove From Cart
                                                 </button>
                                             </div>

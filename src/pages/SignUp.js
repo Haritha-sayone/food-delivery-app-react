@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { auth } from "../firebase/config";
-import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from "react-router-dom";
 import { useUserAuth } from "../context/UserAuthContext";
 import { db } from "../firebase/config";
@@ -8,7 +6,6 @@ import { setDoc, doc } from "firebase/firestore";
 
 
 function SignUp() {
-
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [role, setRole] = useState("");
@@ -27,10 +24,9 @@ function SignUp() {
                 role: role
             });
         }).then(() => {
-            navigate("/signin")
+            navigate("/signin");
         }).catch(err => {
             setError(err.code);
-            console.log(err);
         })
     }
 

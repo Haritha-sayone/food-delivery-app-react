@@ -1,44 +1,16 @@
 import React, { useState, useEffect } from "react";
-import './Menu.css';
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../firebase/config";
 import { useNavigate } from "react-router-dom";
-// import { useUserAuth } from "../context/UserAuthContext";
+import './Menu.css';
+import { db } from "../firebase/config";
+import { getDocs, collection } from "firebase/firestore";
 
 
 function Menu() {
     const [items, setItems] = useState([]);
-    useEffect(() => {
-        // getDocs(collection(db, "items")).then(snapshot => {
-        //     const allItems = snapshot.docs.map(doc => (
-        //         {
-        //             ...doc.data(),
-        //             id: doc.id
-        //         }
-        //     ));
-        //     setItems(allItems)
-        // }).catch(err => console.log(err))
-        getAllItems()
-    }, []);
-    // const { loggedUser, admin } = useUserAuth();
-
     const navigate = useNavigate();
 
     const viewItem = (itemID) => {
-        console.log(itemID);
-        navigate(`/items/detail/${itemID}`)
-    }
-
-    const getAllItems = () => {
-        getDocs(collection(db, "items")).then(snapshot => {
-            const allItems = snapshot.docs.map(doc => (
-                {
-                    ...doc.data(),
-                    id: doc.id
-                }
-            ));
-            setItems(allItems)
-        })
+        navigate(`/items/detail/${itemID}`);
     }
 
     const filterRice = () => {
@@ -61,33 +33,34 @@ function Menu() {
         setItems(chickenItems)
     }
 
-    const filterFish=()=>{
-        const fishItems=items.filter(item=>item.category==="Fish");
+    const filterFish = () => {
+        const fishItems = items.filter(item => item.category === "Fish");
         setItems(fishItems)
     }
 
-    // const addToCart = (itemID, item) => {
-    //     console.log("clicked",itemID);
+    const getAllItems = () => {
+        getDocs(collection(db, "items")).then(snapshot => {
+            const allItems = snapshot.docs.map(doc => (
+                {
+                    ...doc.data(),
+                    id: doc.id
+                }
+            ));
+            setItems(allItems)
+        })
+    }
 
-    //     if (loggedUser === null || loggedUser === undefined) {
-    //         navigate("/signin")
-    //     }
-    //     else {
-    //         if (!admin) {
-    //             // console.log(itemID);
-    //             navigate(`/items/detail/${itemID}`)
-    //             // dispatch({
-    //             //     type: 'addToCart',
-    //             //     payload: {
-    //             //         id: itemID,
-    //             //         product: item,
-    //             //         qty:itemCount
-    //             //     }
-    //             // });
-    //             // alert("item added to cart");
-    //         }
-    //     }
-    // }
+    useEffect(() => {
+        getDocs(collection(db, "items")).then(snapshot => {
+            const allItems = snapshot.docs.map(doc => (
+                {
+                    ...doc.data(),
+                    id: doc.id
+                }
+            ));
+            setItems(allItems)
+        })
+    }, [items]);
 
     return (
         <div className="card-group row">
@@ -102,39 +75,39 @@ function Menu() {
             </div>
 
             <div className="row mb-5">
-            {
-                items.map(item => {
-                    return (
-                        <div className="col-3 text-center" key={item.id}>
-                            <div className="card" style={{ margin: "20px" }}>
+                {
+                    items.map(item => {
+                        return (
+                            <div className="col-3 text-center" key={item.id}>
+                                <div className="card" style={{ margin: "20px" }}>
 
-                                <img
-                                    src={item.img}
-                                    className="card-img-top"
-                                    alt="food"
-                                    width={"10px"}
-                                    height={"200px"}
-                                />
+                                    <img
+                                        src={item.img}
+                                        className="card-img-top"
+                                        alt="food"
+                                        width={"10px"}
+                                        height={"200px"}
+                                    />
 
-                                <div className="card-body">
-                                    <h5 className="card-title">{item.itemName}</h5>
+                                    <div className="card-body">
+                                        <h5 className="card-title">{item.itemName}</h5>
+                                    </div>
+
+                                    <ul className="list-group list-group-flush">
+                                        <li className="list-group-item">{item.price}₹</li>
+                                    </ul>
+
+                                    <div className="card-body">
+                                        <button className="btn block btn-success" onClick={() => viewItem(item.id)}>
+                                            View
+                                        </button>
+                                    </div>
+
                                 </div>
-
-                                <ul className="list-group list-group-flush">
-                                    <li className="list-group-item">{item.price}₹</li>
-                                </ul>
-
-                                <div className="card-body">
-                                    <button className="btn block btn-success" onClick={() => viewItem(item.id)}>
-                                        View
-                                    </button>
-                                </div>
-
                             </div>
-                        </div>
-                    )
-                })
-            }
+                        )
+                    })
+                }
             </div>
         </div>
 

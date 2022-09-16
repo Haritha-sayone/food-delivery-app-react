@@ -1,12 +1,9 @@
 import Header from './components/Header';
 import Footer from './components/Footer';
-
 import Home from './pages/Home';
-// import About from './pages/About';
 import Menu from './pages/Menu';
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
-
 import Dashboard from './components/Admin/Dashboard';
 import AddItems from './components/Admin/AddItems';
 import Items from './components/Admin/Items';
@@ -14,11 +11,8 @@ import FoodDetails from './pages/FoodDetails';
 import EditItems from './components/Admin/EditItems';
 import Cart from './components/Cart/Cart';
 import EmptyCart from './pages/EmptyCart';
-
 import { Routes, Route } from 'react-router-dom';
 
-// import CreateContainer from './components/Admin/CreateContainer';
-// import MainContainer from './components/Admin/MainContainer';
 
 function App() {
   return (
@@ -26,12 +20,7 @@ function App() {
       <Header />
 
       <Routes>
-
-        {/* <Route path="/*" exact element={<MainContainer />} />
-        <Route path="/createItem" element={<CreateContainer />} /> */}
-
         <Route path="/" exact element={<Home />} />
-        {/* <Route path="about" element={<About />} /> */}
         <Route path="/menu" element={<Menu />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
@@ -39,14 +28,12 @@ function App() {
         <Route path="/items/add" element={<AddItems />} />
         <Route path="/items" element={<Items />} />
         <Route path="/items/detail/:id" element={<FoodDetails />} />
-
         <Route path="/items/edit/:id" element={<EditItems />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/cart/empty" element={<EmptyCart />} />
       </Routes>
 
       <Footer />
-
     </div>
   );
 }

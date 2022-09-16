@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useUserAuth } from "../context/UserAuthContext";
-
-import { getDoc, doc, addDoc, collection, updateDoc } from "firebase/firestore";
+import { getDoc, doc, addDoc, collection, updateDoc, setDoc } from "firebase/firestore";
 import { db } from "../firebase/config";
 
 
@@ -32,35 +31,24 @@ function FoodDetails() {
                 dispatch({
                     type: 'addToCart',
                     payload: {
+                        id: item.itemName,
                         itemId: itemID,
-                        product: { ...item, qty: qty },
+                        product: { ...item, qty: qty, cartId: item.itemName },
                         qty: qty,
                         total: qty * item.price
                     }
                 });
-
-                addDoc(collection(db, "cart"), {
-                    // itemID,
-                    // name: item.itemName,
-                    // itemPrice: item.price,
-                    // qty: qty,
-                    cart: item,
-                    // Total: qty * item.price,
+                setDoc(doc(db, "cart", item.itemName), {
+                    id: item.itemName,
+                    cart: { ...item, qty: qty },
                     userID: loggedUser.uid,
                     user: loggedUser.email,
-                }).then(docRef => {
-                    console.log(docRef.id);
-                    updateDoc(doc(db, "cart", docRef.id), {
-                        id: docRef.id
-                    });
-                })
+                });
                 alert("item added to cart");
                 navigate("/cart")
             }
         }
     }
-
-
     console.log(item);
     return (
         <div className='container mb-5'>

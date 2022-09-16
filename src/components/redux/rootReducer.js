@@ -1,7 +1,3 @@
-// import { combineReducers } from "redux";
-// const rootReducer = combineReducers({});
-
-
 const initialState = {
     cartCount: 0,
     cartItems: [],
@@ -35,7 +31,7 @@ const rootReducer = (prevState = initialState, action) => {
                 ...prevState,
                 cartCount: prevState.cartCount - 1,
                 cartItems: prevState.cartItems.filter(item => item.id !== action.payload.id),
-
+                totalPrice:prevState.totalPrice-action.payload.netAmount
             }
         default:
             return prevState;

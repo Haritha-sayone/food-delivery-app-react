@@ -4,10 +4,6 @@ import App from './App';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
-
-import { StateProvider } from "./context/StateProvider";
-import { initialState } from "./context/initialState";
-import reducer from './context/reducer';
 // userAuthContextProvider context
 import { UserAuthContextProvider } from './context/UserAuthContext';
 //Redux
