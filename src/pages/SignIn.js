@@ -45,6 +45,7 @@ function SignIn() {
                             id="exampleInputEmail1"
                             aria-describedby="emailHelp"
                             onChange={event => setEmail(event.target.value)}
+                            required
                         />
                     </div>
                     <div className="mb-3">
@@ -54,6 +55,7 @@ function SignIn() {
                             className="form-control"
                             id="exampleInputPassword1"
                             onChange={event => setPassword(event.target.value)}
+                            required
                         />
                     </div>
                     <button type="submit" className="btn btn-primary">LogIn</button>

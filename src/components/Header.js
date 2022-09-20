@@ -37,7 +37,9 @@ function Header() {
                                 })
                             }}>Logout</a>
                     }
-                    <Link to="/cart">Cart({cartItemsCount})</Link>
+                    {
+                        loggedUser && !admin && <Link to="/cart">Cart({cartItemsCount})</Link>
+                    }
                 </div>
 
                 <div className="profile">

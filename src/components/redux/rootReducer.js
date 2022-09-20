@@ -1,3 +1,12 @@
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+
+
+const persistConfig = {
+    key: "cart",
+    storage
+}
+
 const initialState = {
     cartCount: 0,
     cartItems: [],
@@ -10,16 +19,16 @@ const rootReducer = (prevState = initialState, action) => {
     // console.log("itemFound=",itemFound);
     switch (action.type) {
         case 'addToCart':
-            const item = prevState.cartItems.find(item => item.id === action.payload.itemId?item:"");
-            console.log("item = ", item);
+            const existingItem = prevState.cartItems.find(item => item.id === action.payload.itemId);
+            console.log("item = ", existingItem);
             return {
                 ...prevState,
                 // cartCount: itemIndex < 0 ? prevState.cartCount + 1 : prevState.cartCount,
                 // cartItems: itemIndex < 0 ? [...prevState.cartItems, action.payload.product] : prevState.cartItems,//newproduct
                 // itemQty: itemIndex >= 0 ? Number(prevState.itemQty) + Number(action.payload.qty) : action.payload.qty,
                 // totalPrice: prevState.totalPrice + action.payload.total
-                cartCount: item ? prevState.cartCount : prevState.cartCount + 1,
-                cartItems: item ? prevState.cartItems : [...prevState.cartItems, action.payload.product],
+                cartCount: existingItem ? prevState.cartCount : prevState.cartCount + 1,
+                cartItems: existingItem ? prevState.cartItems : [...prevState.cartItems, action.payload.product],
                 totalPrice: prevState.totalPrice + action.payload.total
                 // cartCount: item ? prevState.cartCount : prevState.cartCount + 1,
                 // cartItems: item ? prevState.cartItems : [...prevState.cartItems, action.payload.product],
@@ -31,11 +40,12 @@ const rootReducer = (prevState = initialState, action) => {
                 ...prevState,
                 cartCount: prevState.cartCount - 1,
                 cartItems: prevState.cartItems.filter(item => item.id !== action.payload.id),
-                totalPrice:prevState.totalPrice-action.payload.netAmount
+                totalPrice: prevState.totalPrice - action.payload.netAmount
             }
         default:
             return prevState;
     }
 }
 
-export default rootReducer;
+// export default rootReducer;
+export default persistReducer(persistConfig, rootReducer);

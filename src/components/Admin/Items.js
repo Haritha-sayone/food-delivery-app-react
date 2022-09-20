@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { db, storage } from '../../firebase/config';
+import { db } from '../../firebase/config';
 import { collection, deleteDoc, getDocs, doc } from 'firebase/firestore';
-import { deleteObject, ref } from 'firebase/storage';
 
 
 const Items = () => {
@@ -26,7 +25,6 @@ const Items = () => {
     }
 
     const handleDelete = (id) => {
-        // deleteObject(ref(storage, `Images/${img}`));
         deleteDoc(doc(db, "items", id));
         console.log("deleted", id);
     }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useUserAuth } from "../context/UserAuthContext";
-import { getDoc, doc, addDoc, collection, updateDoc, setDoc } from "firebase/firestore";
+import { getDoc, doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase/config";
 
 
@@ -33,7 +33,7 @@ function FoodDetails() {
                     payload: {
                         id: item.itemName,
                         itemId: itemID,
-                        product: { ...item, qty: qty, cartId: item.itemName },
+                        product: { ...item, qty: qty, cartId: item.itemName, userID: loggedUser.uid },
                         qty: qty,
                         total: qty * item.price
                     }
@@ -46,6 +46,9 @@ function FoodDetails() {
                 });
                 alert("item added to cart");
                 navigate("/cart")
+            }
+            else{
+                alert("You are not having sufficient permissions to do this.");
             }
         }
     }
@@ -71,20 +74,9 @@ function FoodDetails() {
                                 <div className="card-body">
                                     <h5 className="card-title">{item.itemName}</h5>
                                     <p className="card-text">Price : {item.price} ₹</p>
-                                    <p className="card-text"><small className="text-muted">
-                                        Quantity :
-                                        {/* <input
-                                            type="text"
-                                            placeholder='1 unit'
-                                            required
-                                            onChange={event => setQty(event.target.value)}
-                                        /> */}
-
-                                    </small>
-                                        <select value={qty} onChange={e => {
-                                            setQty(e.target.value)
-                                            console.log("qty = ", qty);
-                                        }}>
+                                    <p className="card-text">
+                                        <small className="text-muted">Quantity : </small>
+                                        <select value={qty} onChange={e => setQty(e.target.value)}>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>

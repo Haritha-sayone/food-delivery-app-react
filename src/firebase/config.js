@@ -25,12 +25,11 @@ const usersRef = collection(db, "users");
 const itemsRef = collection(db, "items");
 const cartRef = collection(db, "cart");
 
-const getItems = getDocs(itemsRef);
-const getCart = getDocs(cartRef);
+
 export default app;
 export {
     auth, db, storage,
-    // usersRef, itemsRef, cartRef
+    usersRef, itemsRef, cartRef,
 };
 
 

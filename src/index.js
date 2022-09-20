@@ -9,6 +9,8 @@ import { UserAuthContextProvider } from './context/UserAuthContext';
 //Redux
 import { Provider } from 'react-redux';
 import store from './components/redux/store';
+import { persistor } from './components/redux/store';
+import { PersistGate } from 'redux-persist/integration/react';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -17,7 +19,9 @@ root.render(
     <Router>
       <UserAuthContextProvider>
         <Provider store={store}>
-          <App />
+          <PersistGate persistor={persistor}>
+            <App />
+          </PersistGate>
         </Provider>
       </UserAuthContextProvider>
     </Router>

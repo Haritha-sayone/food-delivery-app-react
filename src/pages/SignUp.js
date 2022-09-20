@@ -24,6 +24,7 @@ function SignUp() {
                 role: role
             });
         }).then(() => {
+            alert("User created successfully!");
             navigate("/signin");
         }).catch(err => {
             setError(err.code);
@@ -49,6 +50,7 @@ function SignUp() {
                             id="exampleInputEmail1"
                             aria-describedby="emailHelp"
                             onChange={(event) => setEmail(event.target.value)}
+                            required
                         />
                     </div>
                     <div className="mb-3">
@@ -58,6 +60,7 @@ function SignUp() {
                             className="form-control"
                             id="exampleInputPassword1"
                             onChange={(event) => setPassword(event.target.value)}
+                            required
                         />
                     </div>
                     <div className="mb-3">
@@ -67,6 +70,7 @@ function SignUp() {
                             className="form-control"
                             id="exampleRole1"
                             onChange={(event) => setRole(event.target.value)}
+                            required
                         />
                     </div>
                     <button type="submit" className="btn btn-primary">Sign Up</button>
