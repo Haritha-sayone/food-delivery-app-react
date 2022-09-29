@@ -5,16 +5,16 @@ import { Link } from 'react-router-dom';
 const Dashboard = () => {
     return (
         <div className='container'>
-            <div className='row m-5'>
-                <div className=" col-4 card text-dark bg-warning mb-3 mx-2 col" style={{ maxWidth: "40%" }}>
+            <div className='row text-center'>
+                <div className="card text-dark bg-warning mx-2 col-6" style={{ maxWidth: "40%" }}>
                     <div className="card-body">
-                        <Link to="/items/add" className="card-title text-center" style={{ textDecoration: "none" }}>Add Items</Link>
+                        <Link to="/items/add" className="card-text text-center" style={{ textDecoration: "none" }}>ADD ITEMS</Link>
                     </div>
                 </div>
 
-                <div className=" col-4 card text-dark bg-warning mb-3 mx-2 col" style={{ maxWidth: "40%" }}>
+                <div className="card text-dark bg-warning mx-2 col-6" style={{ maxWidth: "40%" }}>
                     <div className="card-body">
-                        <Link to="/items" className="card-title text-center" style={{ textDecoration: "none" }}>View Items</Link>
+                        <Link to="/items" className="card-text text-center" style={{ textDecoration: "none" }}>VIEW ITEMS</Link>
                     </div>
                 </div>
             </div>
