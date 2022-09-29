@@ -37,7 +37,6 @@ const Cart = () => {
         if (items.length === 0) {
             navigate("/cart/empty")
         }
-
         else {
             setCart(items)
         }
@@ -55,7 +54,6 @@ const Cart = () => {
 
             {
                 cart.map(item => {
-                    console.log(item.id, item);
                     return (
                         <div className='card-group row' key={item.id}>
                             <div className='col-3'></div>

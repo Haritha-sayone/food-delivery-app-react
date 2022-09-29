@@ -1,9 +1,9 @@
-.filter-buttons{
+.item-category-filter-buttons{
     margin:20px;
     width:100%;
     text-align: center;
     
 }
-.filter-buttons button{
+.item-category-filter-buttons button{
     margin:5px;
 }

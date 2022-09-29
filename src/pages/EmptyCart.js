@@ -5,7 +5,6 @@ import emptyCart from "../images/emptyCart.svg";
 
 const EmptyCart = () => {
     const navigate = useNavigate();
-
     return (
         <div className='container'>
             <h1>Your Cart is Empty!</h1>

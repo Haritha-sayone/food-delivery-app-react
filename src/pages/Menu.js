@@ -30,12 +30,17 @@ function Menu() {
 
     const filterChicken = () => {
         const chickenItems = items.filter(item => item.category === "Chicken");
-        setItems(chickenItems)
+        setItems(chickenItems);
     }
 
     const filterFish = () => {
         const fishItems = items.filter(item => item.category === "Fish");
-        setItems(fishItems)
+        setItems(fishItems);
+    }
+
+    const filterFruits = () => {
+        const fruits = items.filter(item => item.category === "Fruits");
+        setItems(fruits);
     }
 
     const getAllItems = () => {
@@ -65,13 +70,14 @@ function Menu() {
     return (
         <div className="card-group row">
 
-            <div className="filter-buttons">
+            <div className="item-category-filter-buttons">
                 <button className="btn btn-outline-primary" onClick={getAllItems}>All</button>
                 <button className="btn btn-outline-info" onClick={filterDrinks}>Drinks</button>
                 <button className="btn btn-outline-success" onClick={filterIcecreams}>Icecreams</button>
                 <button className="btn btn-outline-danger" onClick={filterRice}>Rice</button>
                 <button className="btn btn-outline-warning" onClick={filterChicken}>Chicken</button>
                 <button className="btn btn-outline-secondary" onClick={filterFish}>Fish</button>
+                <button className="btn btn-outline-dark" onClick={filterFruits}>Fruits</button>
             </div>
 
             <div className="row mb-5">
@@ -84,7 +90,7 @@ function Menu() {
                                     <img
                                         src={item.img}
                                         className="card-img-top"
-                                        alt="food"
+                                        alt={item.itemName}
                                         width={"10px"}
                                         height={"200px"}
                                     />

@@ -26,7 +26,6 @@ const Items = () => {
 
     const handleDelete = (id) => {
         deleteDoc(doc(db, "items", id));
-        console.log("deleted", id);
     }
 
     return (

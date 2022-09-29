@@ -21,13 +21,11 @@ function FoodDetails() {
     }, [id])
 
     const addToCart = (itemID, item) => {
-        console.log(itemID, item);
         if (loggedUser === null || loggedUser === undefined) {
             navigate("/signin")
         }
         else {
             if (!admin) {
-                console.log(itemID);
                 dispatch({
                     type: 'addToCart',
                     payload: {
@@ -47,12 +45,11 @@ function FoodDetails() {
                 alert("item added to cart");
                 navigate("/cart")
             }
-            else{
+            else {
                 alert("You are not having sufficient permissions to do this.");
             }
         }
     }
-    console.log(item);
     return (
         <div className='container mb-5'>
             <h1>Food Details</h1>

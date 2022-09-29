@@ -18,7 +18,6 @@ const AddItems = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(itemName, price, category, img);
         const imageRef = ref(storage, `Images/${img.name}`);
         uploadBytes(imageRef, img).then(snapshot => {
             getDownloadURL(snapshot.ref).then(url => {
@@ -29,7 +28,6 @@ const AddItems = () => {
                     category,
                     img: url
                 }).then(docRef => {
-                    console.log(docRef);
                     updateDoc(doc(db, "items", docRef.id), {
                         id: docRef.id
                     });
