@@ -26,7 +26,9 @@ function Header() {
                         admin && <Link to="/admin">Dashboard</Link>
                     }
                     <Link to="/menu">Menu</Link>
-                    <Link to="/signin">SignIn/SignUp</Link>
+                    {
+                        !loggedUser && <Link to="/signin">SignIn/SignUp</Link>
+                    }
                     {
                         loggedUser && <a
                             type="button"
