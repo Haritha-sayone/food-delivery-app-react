@@ -1,6 +1,7 @@
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
+import About from './pages/About';
 import Menu from './pages/Menu';
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
@@ -12,15 +13,18 @@ import EditItems from './components/Admin/EditItems';
 import Cart from './components/Cart/Cart';
 import EmptyCart from './pages/EmptyCart';
 import { Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function App() {
   return (
     <div className="App" style={{ width: "100vw" }}>
       <Header />
-
+      <ToastContainer />
       <Routes>
         <Route path="/" exact element={<Home />} />
+        <Route path="/about" element={<About />} />
         <Route path="/menu" element={<Menu />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
@@ -32,7 +36,6 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/cart/empty" element={<EmptyCart />} />
       </Routes>
-
       <Footer />
     </div>
   );

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useUserAuth } from "../context/UserAuthContext";
 import { db } from "../firebase/config";
 import { setDoc, doc } from "firebase/firestore";
-
+import { toast } from 'react-toastify';
 
 function SignUp() {
     const [email, setEmail] = useState("");
@@ -24,10 +24,11 @@ function SignUp() {
                 role: role
             });
         }).then(() => {
-            alert("User created successfully!");
+            toast.success("Account created");
             navigate("/signin");
         }).catch(err => {
             setError(err.code);
+            toast.error("Error")
         })
     }
 

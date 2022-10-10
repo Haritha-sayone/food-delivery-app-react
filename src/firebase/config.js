@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { getFirestore, collection } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 
@@ -31,30 +31,3 @@ export {
     auth, db, storage,
     usersRef, itemsRef, cartRef,
 };
-
-
-
-
-
-
-
-
-
-//collection ref
-// export const userRef = collection(db, 'users');
-
-// getDocs(userRef).then(snapshot => {
-//     let users=[]
-//     snapshot.docs.forEach(doc => {
-//         users.push({ ...doc.data(), id:doc.id })
-//     })
-//     console.log(users);
-// })
-
-// export const usersDb = db.collection('users');
-
-// export const user = auth.currentUser
-// export const userRef=doc(collection())
-// export const createUserDocument = async (user, additionalData) => {
-//     if (!user) return;
-// }

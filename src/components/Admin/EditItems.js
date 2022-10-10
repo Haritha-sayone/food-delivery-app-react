@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { db } from '../../firebase/config';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import { toast } from 'react-toastify';
 
 
 const EditItems = () => {
@@ -33,7 +34,7 @@ const EditItems = () => {
             price,
             category
         }).then(() => {
-            alert("item edited successfully");
+            toast.success("Edited item");
             navigate("/items")
         }).catch(err => {
             setError(err.code);

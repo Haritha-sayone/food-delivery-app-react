@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../../firebase/config';
 import { collection, deleteDoc, getDocs, doc } from 'firebase/firestore';
+import { toast } from 'react-toastify';
 
 
 const Items = () => {
@@ -26,6 +27,7 @@ const Items = () => {
 
     const handleDelete = (id) => {
         deleteDoc(doc(db, "items", id));
+        toast.info("Deleted successfully");
     }
 
     return (

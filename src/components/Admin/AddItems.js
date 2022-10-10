@@ -5,6 +5,7 @@ import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { collection, addDoc, updateDoc, doc } from 'firebase/firestore';
 import { db } from '../../firebase/config';
 import { useUserAuth } from '../../context/UserAuthContext';
+import { toast } from 'react-toastify';
 
 
 const AddItems = () => {
@@ -34,7 +35,7 @@ const AddItems = () => {
                 })
             })
         }).then(() => {
-            alert("item added successfully");
+            toast.success("Success");
             navigate("/items");
         }).catch(err => {
             setError(err.code)

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useUserAuth } from '../../context/UserAuthContext';
+import { toast } from 'react-toastify';
 
 const Cart = () => {
     const [cart, setCart] = useState([]);
@@ -25,11 +26,11 @@ const Cart = () => {
                 }
             });
             deleteDoc(doc(db, "cart", cartID)).then(() => {
-                alert("Item deleted");
+                toast.info("Item removed");
             })
         }
         else {
-            alert("You are not authorised to perform this")
+            toast.warn("You are not authorised to do this");
         }
     }
 

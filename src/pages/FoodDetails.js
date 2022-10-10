@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useUserAuth } from "../context/UserAuthContext";
 import { getDoc, doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase/config";
+import { toast } from 'react-toastify';
 
 
 function FoodDetails() {
@@ -13,7 +14,7 @@ function FoodDetails() {
     const { loggedUser, admin } = useUserAuth();
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
+    
     useEffect(() => {
         getDoc(doc(db, "items", id)).then(doc => {
             setItem(doc.data());
@@ -22,6 +23,7 @@ function FoodDetails() {
 
     const addToCart = (itemID, item) => {
         if (loggedUser === null || loggedUser === undefined) {
+            toast.error("Please login to order")
             navigate("/signin")
         }
         else {
@@ -42,11 +44,11 @@ function FoodDetails() {
                     userID: loggedUser.uid,
                     user: loggedUser.email,
                 });
-                alert("item added to cart");
+                toast.success("Added to cart");
                 navigate("/cart")
             }
             else {
-                alert("You are not having sufficient permissions to do this.");
+                toast.warn("You dont have permission");
             }
         }
     }
