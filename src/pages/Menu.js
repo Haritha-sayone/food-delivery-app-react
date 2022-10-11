@@ -7,6 +7,8 @@ import { getDocs, collection } from "firebase/firestore";
 
 function Menu() {
     const [items, setItems] = useState([]);
+    const [filteredItems, setFilteredItems] = useState([]);
+    const [filterStatus, setFilterStatus] = useState(false);
     const navigate = useNavigate();
 
     const viewItem = (itemID) => {
@@ -14,36 +16,43 @@ function Menu() {
     }
 
     const filterRice = () => {
-        const riceItems = items.filter(item => item.category === "Rice");
-        setItems(riceItems);
+        setFilterStatus(true);
+        const riceItems = items.filter(item => item.category === "Rice" || item.category === "rice");
+        setFilteredItems(riceItems);
     }
 
     const filterDrinks = () => {
-        const drinks = items.filter(item => item.category === "Drinks");
-        setItems(drinks)
+        setFilterStatus(true);
+        const drinks = items.filter(item => item.category === "Drinks" || item.category === "drinks");
+        setFilteredItems(drinks)
     }
 
     const filterIcecreams = () => {
-        const icecreams = items.filter(item => item.category === "Icecreams");
-        setItems(icecreams);
+        setFilterStatus(true);
+        const icecreams = items.filter(item => item.category === "Icecreams" || item.category === "icecreams");
+        setFilteredItems(icecreams);
     }
 
     const filterChicken = () => {
-        const chickenItems = items.filter(item => item.category === "Chicken");
-        setItems(chickenItems);
+        setFilterStatus(true);
+        const chickenItems = items.filter(item => item.category === "Chicken" || item.category === "chicken");
+        setFilteredItems(chickenItems);
     }
 
     const filterFish = () => {
-        const fishItems = items.filter(item => item.category === "Fish");
-        setItems(fishItems);
+        setFilterStatus(true);
+        const fishItems = items.filter(item => item.category === "Fish" || item.category === "fish");
+        setFilteredItems(fishItems);
     }
 
     const filterFruits = () => {
-        const fruits = items.filter(item => item.category === "Fruits");
-        setItems(fruits);
+        setFilterStatus(true);
+        const fruits = items.filter(item => item.category === "Fruits" || item.category == "fruits");
+        setFilteredItems(fruits);
     }
 
     const getAllItems = () => {
+        setFilterStatus(false);
         getDocs(collection(db, "items")).then(snapshot => {
             const allItems = snapshot.docs.map(doc => (
                 {
@@ -82,7 +91,36 @@ function Menu() {
 
             <div className="row mb-5">
                 {
-                    items.map(item => {
+                    filterStatus && filteredItems?.map(item => {
+                        return (
+                            <div className="col-3 text-center" key={item.id}>
+                                <div className="card" style={{ margin: "20px" }}>
+                                    <img
+                                        src={item.img}
+                                        className="card-img-top"
+                                        alt={item.itemName}
+                                        width={"10px"}
+                                        height={"200px"}
+                                    />
+                                    <div className="card-body">
+                                        <h5 className="card-title">{item.itemName}</h5>
+                                    </div>
+                                    <ul className="list-group list-group-flush">
+                                        <li className="list-group-item">{item.price}₹</li>
+                                    </ul>
+                                    <div className="card-body">
+                                        <button className="btn block btn-success" onClick={() => viewItem(item.id)}>
+                                            View
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    })
+                }
+
+                {
+                    !filterStatus && items.map(item => {
                         return (
                             <div className="col-3 text-center" key={item.id}>
                                 <div className="card" style={{ margin: "20px" }}>
@@ -113,6 +151,10 @@ function Menu() {
                             </div>
                         )
                     })
+                }
+
+                {
+                    filterStatus && !filteredItems.length && <span className="text-center mt-5 py-5">No items found.</span>
                 }
             </div>
         </div>
