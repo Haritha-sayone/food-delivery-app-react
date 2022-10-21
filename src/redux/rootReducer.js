@@ -1,7 +1,6 @@
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-
 const persistConfig = {
     key: "cart",
     storage
@@ -20,8 +19,7 @@ const rootReducer = (prevState = initialState, action) => {
                 ...prevState,
                 cartCount: existingItem ? prevState.cartCount : prevState.cartCount + 1,
                 cartItems: existingItem ? prevState.cartItems : [...prevState.cartItems, action.payload.product],
-                totalPrice: prevState.totalPrice + action.payload.total,
-                // itemQty: existingItem ? Number(prevState.itemQty)+Number(action.payload.qty) : action.payload.qty
+                totalPrice: prevState.totalPrice + action.payload.total
             }
         case 'removeFromCart':
             return {

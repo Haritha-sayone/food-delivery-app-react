@@ -25,9 +25,8 @@ const Cart = () => {
                     netAmount: itmPrice
                 }
             });
-            deleteDoc(doc(db, "cart", cartID)).then(() => {
-                toast.info("Item removed");
-            })
+            deleteDoc(doc(db, "cart", cartID));
+            toast.info("Item removed");
         }
         else {
             toast.warn("You are not authorised to do this");
@@ -41,7 +40,7 @@ const Cart = () => {
         else {
             setCart(items)
         }
-    }, [items.length])
+    }, [items])
 
     return (
         <div className='container my-5'>
@@ -105,11 +104,8 @@ const Cart = () => {
                     )
                 })
             }
-
-
         </div>
     )
 }
-
 
 export default Cart;

@@ -4,7 +4,6 @@ import './Menu.css';
 import { db } from "../firebase/config";
 import { getDocs, collection } from "firebase/firestore";
 
-
 function Menu() {
     const [items, setItems] = useState([]);
     const [filteredItems, setFilteredItems] = useState([]);
@@ -47,7 +46,7 @@ function Menu() {
 
     const filterFruits = () => {
         setFilterStatus(true);
-        const fruits = items.filter(item => item.category === "Fruits" || item.category == "fruits");
+        const fruits = items.filter(item => item.category === "Fruits" || item.category === "fruits");
         setFilteredItems(fruits);
     }
 

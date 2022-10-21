@@ -6,7 +6,6 @@ import Menu from "./Menu";
 import { useNavigate } from "react-router-dom";
 import { useUserAuth } from "../context/UserAuthContext";
 
-
 function Home() {
     const navigate = useNavigate();
     const { loggedUser } = useUserAuth();

@@ -7,7 +7,6 @@ import { db } from '../../firebase/config';
 import { useUserAuth } from '../../context/UserAuthContext';
 import { toast } from 'react-toastify';
 
-
 const AddItems = () => {
     const [itemName, setItemName] = useState("");
     const [price, setPrice] = useState(0);

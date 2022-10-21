@@ -6,7 +6,6 @@ import Logo from "../images/logo.png";
 import Avatar from '../images/avatar.png';
 import "./Header.css";
 
-
 function Header() {
     const { logout, loggedUser, admin, setAdmin } = useUserAuth();
     const navigate = useNavigate();

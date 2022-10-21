@@ -6,7 +6,6 @@ import { getDoc, doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase/config";
 import { toast } from 'react-toastify';
 
-
 function FoodDetails() {
     const [item, setItem] = useState({});
     const [qty, setQty] = useState(1);
@@ -14,17 +13,17 @@ function FoodDetails() {
     const { loggedUser, admin } = useUserAuth();
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    
+
     useEffect(() => {
         getDoc(doc(db, "items", id)).then(doc => {
             setItem(doc.data());
         })
-    }, [id])
+    }, []);
 
     const addToCart = (itemID, item) => {
         if (loggedUser === null || loggedUser === undefined) {
-            toast.error("Please login to order")
-            navigate("/signin")
+            toast.error("Please login to order");
+            navigate("/signin");
         }
         else {
             if (!admin) {
@@ -45,7 +44,7 @@ function FoodDetails() {
                     user: loggedUser.email,
                 });
                 toast.success("Added to cart");
-                navigate("/cart")
+                navigate("/cart");
             }
             else {
                 toast.warn("You dont have permission");

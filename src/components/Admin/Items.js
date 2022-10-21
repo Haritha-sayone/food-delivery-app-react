@@ -4,7 +4,6 @@ import { db } from '../../firebase/config';
 import { collection, deleteDoc, getDocs, doc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 
-
 const Items = () => {
     const [items, setItems] = useState([]);
     const navigate = useNavigate();

@@ -8,16 +8,14 @@ import {
 import { auth, db } from "../firebase/config";
 import { getDoc, doc } from "firebase/firestore";
 
-
 const userAuthContext = createContext();
 
 export function UserAuthContextProvider({ children }) {
-
     const [loggedUser, setLoggedUser] = useState("");
     const [admin, setAdmin] = useState(false);
 
-    function signUp(email, password, role) {
-        return createUserWithEmailAndPassword(auth, email, password, role);
+    function signUp(email, password) {
+        return createUserWithEmailAndPassword(auth, email, password);
     }
 
     function signIn(email, password) {

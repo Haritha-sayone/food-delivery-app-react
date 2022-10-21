@@ -28,7 +28,7 @@ function SignUp() {
             navigate("/signin");
         }).catch(err => {
             setError(err.code);
-            toast.error("Error")
+            toast.error("Error");
         })
     }
 

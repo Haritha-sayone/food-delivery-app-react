@@ -4,7 +4,6 @@ import { db } from '../../firebase/config';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 
-
 const EditItems = () => {
     const [itemName, setItemName] = useState("");
     const [price, setPrice] = useState(0);

@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useUserAuth } from "../context/UserAuthContext";
 import { getDoc, doc } from "firebase/firestore";
 import { db } from "../firebase/config";
-
+import { toast } from "react-toastify";
 
 function SignIn() {
     const [email, setEmail] = useState("");
@@ -18,8 +18,11 @@ function SignIn() {
             const docRef = doc(db, "users", cred.user.uid);
             getDoc(docRef).then((doc) => {
                 doc.data().role === "admin" ? navigate("/admin") : navigate("/menu");
-            })
+
+            });
+            toast.success("Login success");
         }).catch(err => {
+            toast.error("Failed to login");
             setError(err.code);
         });
     }
